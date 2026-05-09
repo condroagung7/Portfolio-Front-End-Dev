@@ -1,8 +1,8 @@
-import Navbar from "./components/navbar";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import Projects from "./components/Projects";
+import Projects from "./components/Projects.tsx";
 import Contact from "./components/Contact.tsx";
 import Footer from "./components/Footer";
 
