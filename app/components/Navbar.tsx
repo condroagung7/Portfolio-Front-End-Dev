@@ -49,7 +49,7 @@ export default function Navbar() {
           letterSpacing: "0.05em",
         }}
       >
-        condro.dev
+        Portfolio Agung.Dev
       </a>
 
       {/* Desktop Nav */}
