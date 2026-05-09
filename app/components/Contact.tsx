@@ -1,211 +1,290 @@
 "use client";
-
 import { useState } from "react";
 
-const socialLinks = [
-  { label: "GitHub", href: "https://github.com", icon: "⌥" },
-  { label: "LinkedIn", href: "https://linkedin.com", icon: "⊞" },
-  { label: "Twitter/X", href: "https://twitter.com", icon: "✕" },
-  { label: "Email", href: "mailto:condro@email.com", icon: "✉" },
-];
-
 export default function Contact() {
-  const [copied, setCopied] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
 
-  const copyEmail = () => {
-    navigator.clipboard.writeText("condro@email.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleSubmit = async () => {
+    if (!form.name || !form.email || !form.message) return;
+    setStatus("sending");
+    await new Promise((r) => setTimeout(r, 1500));
+    setStatus("sent");
   };
 
   return (
     <section
       id="contact"
-      style={{
-        padding: "8rem 2rem",
-        background: "var(--bg-2)",
-        borderTop: "1px solid var(--border)",
-      }}
+      className="py-32 px-6"
+      style={{ background: "var(--surface)" }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      <div className="max-w-6xl mx-auto">
         {/* Section label */}
         <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            marginBottom: "4rem",
-          }}
+          className="flex items-center gap-4 mb-16"
+          style={{ fontFamily: "'DM Mono', monospace" }}
         >
+          <span style={{ color: "var(--accent)", fontSize: "12px" }}>04</span>
+          <div style={{ width: "60px", height: "1px", background: "var(--accent)" }} />
           <span
             style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.7rem",
-              color: "var(--accent)",
-              letterSpacing: "0.15em",
+              fontSize: "11px",
+              color: "var(--muted)",
               textTransform: "uppercase",
+              letterSpacing: "0.15em",
             }}
           >
-            04 / Contact
+            Contact
           </span>
-          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.2fr 1fr",
-            gap: "6rem",
-            alignItems: "start",
-          }}
-          className="contact-grid"
-        >
+        <div className="grid md:grid-cols-2 gap-16">
           {/* Left */}
           <div>
             <h2
+              className="font-bold mb-6"
               style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: "clamp(2.5rem, 5vw, 4.5rem)",
-                lineHeight: 1.05,
-                marginBottom: "1.5rem",
+                fontSize: "clamp(32px, 4vw, 56px)",
                 letterSpacing: "-0.02em",
+                lineHeight: 1.05,
               }}
             >
-              Mari{" "}
-              <em style={{ color: "var(--accent)", display: "block" }}>
-                Bekerja Sama.
-              </em>
+              Mari
+              <br />
+              <span style={{ color: "var(--accent)" }}>Berkolaborasi</span>
+              <br />
+              Bersama.
             </h2>
             <p
               style={{
-                color: "var(--text-muted)",
-                fontSize: "0.95rem",
-                lineHeight: 1.8,
-                maxWidth: "440px",
-                marginBottom: "2.5rem",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "13px",
+                color: "var(--muted)",
+                lineHeight: "1.8",
+                maxWidth: "380px",
+                marginBottom: "40px",
+                fontWeight: 300,
               }}
             >
-              Saya terbuka untuk peluang freelance, full-time, atau kolaborasi proyek.
-              Jangan ragu untuk menghubungi saya!
+              Punya proyek menarik? Butuh frontend developer berpengalaman? 
+              Atau sekadar ingin ngobrol tentang teknologi? 
+              Jangan ragu untuk menghubungi saya.
             </p>
 
-            {/* Email copy */}
-            <button
-              onClick={copyEmail}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.75rem",
-                padding: "1rem 1.5rem",
-                background: "transparent",
-                border: "1px solid var(--border)",
-                borderRadius: "4px",
-                color: "var(--text)",
-                cursor: "pointer",
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.85rem",
-                transition: "border-color 0.2s, background 0.2s",
-                letterSpacing: "0.03em",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--accent)";
-                e.currentTarget.style.background = "rgba(232,213,163,0.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--border)";
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              <span style={{ color: "var(--accent)" }}>✉</span>
-              condro@email.com
-              <span
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.65rem",
-                  color: copied ? "var(--green)" : "var(--text-dim)",
-                  transition: "color 0.2s",
-                  marginLeft: "0.25rem",
-                }}
-              >
-                {copied ? "✓ copied" : "click to copy"}
-              </span>
-            </button>
-          </div>
-
-          {/* Right: Social Links */}
-          <div>
-            <div
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.7rem",
-                color: "var(--text-dim)",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                marginBottom: "1.5rem",
-              }}
-            >
-              Find me on
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-              {socialLinks.map((link) => (
+            {/* Social links */}
+            <div className="flex flex-col gap-4">
+              {[
+                { label: "Email", value: "condro@example.com", href: "mailto:condro@example.com" },
+                { label: "GitHub", value: "github.com/condro", href: "#" },
+                { label: "LinkedIn", value: "linkedin.com/in/condro", href: "#" },
+                { label: "Twitter", value: "@condrodev", href: "#" },
+              ].map((item) => (
                 <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "1rem 0",
-                    borderBottom: "1px solid var(--border)",
-                    textDecoration: "none",
-                    color: "var(--text-muted)",
-                    transition: "color 0.2s, padding-left 0.2s",
-                    fontSize: "0.9rem",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "var(--text)";
-                    e.currentTarget.style.paddingLeft = "0.75rem";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "var(--text-muted)";
-                    e.currentTarget.style.paddingLeft = "0";
-                  }}
+                  key={item.label}
+                  href={item.href}
+                  className="flex items-center gap-4 group"
+                  style={{ textDecoration: "none" }}
                 >
-                  <span style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                    <span
-                      style={{
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: "0.8rem",
-                        color: "var(--text-dim)",
-                      }}
-                    >
-                      {link.icon}
-                    </span>
-                    {link.label}
-                  </span>
                   <span
                     style={{
-                      fontSize: "0.7rem",
                       fontFamily: "'DM Mono', monospace",
-                      color: "var(--text-dim)",
+                      fontSize: "10px",
+                      color: "var(--muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      minWidth: "64px",
                     }}
                   >
-                    ↗
+                    {item.label}
+                  </span>
+                  <div
+                    style={{
+                      flex: 1,
+                      height: "1px",
+                      background: "var(--border)",
+                    }}
+                  />
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "12px",
+                      color: "var(--text)",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={(e) =>
+                      ((e.currentTarget as HTMLElement).style.color = "var(--accent)")
+                    }
+                    onMouseLeave={(e) =>
+                      ((e.currentTarget as HTMLElement).style.color = "var(--text)")
+                    }
+                  >
+                    {item.value} ↗
                   </span>
                 </a>
               ))}
             </div>
           </div>
+
+          {/* Right: form */}
+          <div>
+            {status === "sent" ? (
+              <div
+                className="h-full flex flex-col items-center justify-center text-center p-12"
+                style={{
+                  border: "1px solid rgba(232,255,71,0.3)",
+                  borderRadius: "4px",
+                  background: "rgba(232,255,71,0.03)",
+                }}
+              >
+                <div
+                  style={{ fontSize: "48px", marginBottom: "16px" }}
+                >
+                  ✓
+                </div>
+                <h3
+                  className="font-bold mb-3"
+                  style={{ fontSize: "24px", color: "var(--accent)" }}
+                >
+                  Pesan Terkirim!
+                </h3>
+                <p
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "13px",
+                    color: "var(--muted)",
+                    lineHeight: "1.7",
+                    fontWeight: 300,
+                  }}
+                >
+                  Terima kasih sudah menghubungi saya. Saya akan membalas dalam 1–2 hari kerja.
+                </p>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-5">
+                {[
+                  { key: "name", label: "Nama", placeholder: "Nama lengkap kamu", type: "text" },
+                  { key: "email", label: "Email", placeholder: "email@example.com", type: "email" },
+                ].map((field) => (
+                  <div key={field.key}>
+                    <label
+                      style={{
+                        display: "block",
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "10px",
+                        color: "var(--muted)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.1em",
+                        marginBottom: "8px",
+                      }}
+                    >
+                      {field.label}
+                    </label>
+                    <input
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      value={form[field.key as "name" | "email"]}
+                      onChange={(e) =>
+                        setForm({ ...form, [field.key]: e.target.value })
+                      }
+                      style={{
+                        width: "100%",
+                        background: "var(--bg)",
+                        border: "1px solid var(--border)",
+                        borderRadius: "2px",
+                        padding: "12px 16px",
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "13px",
+                        color: "var(--text)",
+                        outline: "none",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) =>
+                        (e.target.style.borderColor = "rgba(232,255,71,0.4)")
+                      }
+                      onBlur={(e) =>
+                        (e.target.style.borderColor = "var(--border)")
+                      }
+                    />
+                  </div>
+                ))}
+
+                <div>
+                  <label
+                    style={{
+                      display: "block",
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "10px",
+                      color: "var(--muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      marginBottom: "8px",
+                    }}
+                  >
+                    Pesan
+                  </label>
+                  <textarea
+                    placeholder="Ceritakan tentang proyekmu..."
+                    rows={5}
+                    value={form.message}
+                    onChange={(e) =>
+                      setForm({ ...form, message: e.target.value })
+                    }
+                    style={{
+                      width: "100%",
+                      background: "var(--bg)",
+                      border: "1px solid var(--border)",
+                      borderRadius: "2px",
+                      padding: "12px 16px",
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "13px",
+                      color: "var(--text)",
+                      outline: "none",
+                      resize: "none",
+                      transition: "border-color 0.2s",
+                    }}
+                    onFocus={(e) =>
+                      (e.target.style.borderColor = "rgba(232,255,71,0.4)")
+                    }
+                    onBlur={(e) =>
+                      (e.target.style.borderColor = "var(--border)")
+                    }
+                  />
+                </div>
+
+                <button
+                  onClick={handleSubmit}
+                  disabled={status === "sending"}
+                  style={{
+                    width: "100%",
+                    padding: "14px",
+                    background:
+                      status === "sending" ? "rgba(232,255,71,0.5)" : "var(--accent)",
+                    color: "#000",
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.15em",
+                    border: "none",
+                    borderRadius: "2px",
+                    cursor: status === "sending" ? "not-allowed" : "pointer",
+                    transition: "all 0.2s",
+                  }}
+                  onMouseEnter={(e) => {
+                    if (status !== "sending")
+                      (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.transform = "none";
+                  }}
+                >
+                  {status === "sending" ? "Mengirim..." : "Kirim Pesan →"}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .contact-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-        }
-      `}</style>
     </section>
   );
 }

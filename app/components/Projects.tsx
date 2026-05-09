@@ -1,258 +1,286 @@
 "use client";
+import { useState } from "react";
 
 const projects = [
   {
-    number: "01",
-    title: "ReqRes Dashboard",
-    description:
-      "Aplikasi full-stack React dengan autentikasi JWT, manajemen user, dan integrasi REST API menggunakan TypeScript dan Tailwind CSS.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "REST API"],
-    link: "https://github.com",
-    demo: "https://vercel.app",
+    id: "01",
+    title: "Dashboard Analytics",
+    category: "Full-Stack App",
+    tech: ["Next.js", "TypeScript", "Tailwind", "Prisma"],
+    desc: "Platform analitik real-time dengan visualisasi data interaktif, autentikasi JWT, dan dark mode. Dibangun dengan arsitektur component-based yang skalabel.",
+    year: "2024",
+    link: "#",
+    github: "#",
     featured: true,
   },
   {
-    number: "02",
-    title: "Sakura Restaurant",
-    description:
-      "Website restoran Jepang dengan animasi sakura, menu interaktif, dan reservasi form. Dibangun sebagai single HTML file dengan React CDN.",
-    tags: ["React", "Tailwind CSS v4", "CSS Animation"],
-    link: "https://github.com",
-    demo: "https://vercel.app",
+    id: "02",
+    title: "E-Commerce UI Kit",
+    category: "UI Library",
+    tech: ["React", "TypeScript", "Storybook", "CSS Modules"],
+    desc: "Komponen UI reusable untuk e-commerce: product cards, cart drawer, checkout form, dengan dokumentasi Storybook lengkap dan aksesibilitas penuh.",
+    year: "2024",
+    link: "#",
+    github: "#",
     featured: true,
   },
   {
-    number: "03",
-    title: "Portfolio Landing Page",
-    description:
-      "Landing page portfolio dengan komponen-based architecture, props-driven data flow, dan Tailwind CSS.",
-    tags: ["React", "JavaScript", "Tailwind CSS"],
-    link: "https://github.com",
-    demo: "https://vercel.app",
+    id: "03",
+    title: "reqres.in Integration",
+    category: "Frontend App",
+    tech: ["React", "TypeScript", "Tailwind", "Axios"],
+    desc: "Aplikasi React dengan integrasi REST API penuh: register, login, paginated user list, user detail, dengan AuthContext dan ProtectedRoute.",
+    year: "2024",
+    link: "#",
+    github: "#",
     featured: false,
   },
   {
-    number: "04",
-    title: "Custom Hooks Library",
-    description:
-      "Koleksi custom React hooks: useFetch, useDebounce, useLocalStorage, dan useMediaQuery untuk reusabilitas kode.",
-    tags: ["React", "TypeScript", "Hooks"],
-    link: "https://github.com",
-    demo: null,
+    id: "04",
+    title: "Sakura Restaurant",
+    category: "Landing Page",
+    tech: ["React", "Tailwind v4", "Framer Motion"],
+    desc: "Website restoran Jepang dengan animasi sakura, dark luxury aesthetic, tabbed menu, reservation form, dan scroll-aware navigation.",
+    year: "2023",
+    link: "#",
+    github: "#",
+    featured: false,
+  },
+  {
+    id: "05",
+    title: "Portfolio Starter",
+    category: "Template",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS"],
+    desc: "Template portofolio open-source yang responsif dengan dark mode, animasi smooth, dan optimasi SEO. Digunakan oleh 100+ developer.",
+    year: "2023",
+    link: "#",
+    github: "#",
+    featured: false,
+  },
+  {
+    id: "06",
+    title: "Task Manager PWA",
+    category: "Progressive Web App",
+    tech: ["React", "Redux", "PWA", "IndexedDB"],
+    desc: "Aplikasi manajemen tugas offline-first dengan sinkronisasi data, notifikasi push, dan instalasi sebagai PWA di device pengguna.",
+    year: "2023",
+    link: "#",
+    github: "#",
     featured: false,
   },
 ];
 
 export default function Projects() {
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+
   return (
-    <section
-      id="projects"
-      style={{
-        padding: "8rem 2rem",
-        maxWidth: "1100px",
-        margin: "0 auto",
-      }}
-    >
-      {/* Section label */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "1rem",
-          marginBottom: "4rem",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: "0.7rem",
-            color: "var(--accent)",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-          }}
+    <section id="projects" className="py-32 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Section label */}
+        <div
+          className="flex items-center gap-4 mb-4"
+          style={{ fontFamily: "'DM Mono', monospace" }}
         >
-          03 / Projects
-        </span>
-        <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
-        <a
-          href="https://github.com"
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: "0.7rem",
-            color: "var(--text-muted)",
-            textDecoration: "none",
-            letterSpacing: "0.05em",
-            whiteSpace: "nowrap",
-            transition: "color 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-        >
-          Lihat semua →
-        </a>
-      </div>
+          <span style={{ color: "var(--accent)", fontSize: "12px" }}>03</span>
+          <div style={{ width: "60px", height: "1px", background: "var(--accent)" }} />
+          <span style={{ fontSize: "11px", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+            Projects
+          </span>
+        </div>
 
-      <h2
-        style={{
-          fontFamily: "'DM Serif Display', serif",
-          fontSize: "clamp(2rem, 4vw, 3rem)",
-          marginBottom: "3rem",
-          lineHeight: 1.15,
-        }}
-      >
-        Proyek{" "}
-        <em style={{ color: "var(--accent)" }}>Pilihan</em>
-      </h2>
-
-      {/* Projects list */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {projects.map((project, i) => (
-          <div
-            key={project.number}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "80px 1fr auto",
-              gap: "2rem",
-              padding: "2rem 0",
-              borderBottom: "1px solid var(--border)",
-              alignItems: "center",
-              transition: "background 0.2s",
-              cursor: "default",
-            }}
-            className="project-row"
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.paddingLeft = "1rem";
-              (e.currentTarget as HTMLElement).style.paddingRight = "1rem";
-              (e.currentTarget as HTMLElement).style.background = "var(--bg-2)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.paddingLeft = "0";
-              (e.currentTarget as HTMLElement).style.paddingRight = "0";
-              (e.currentTarget as HTMLElement).style.background = "transparent";
-            }}
+        <div className="flex items-end justify-between mb-16 flex-wrap gap-4">
+          <h2
+            className="font-bold"
+            style={{ fontSize: "clamp(32px, 4vw, 52px)", letterSpacing: "-0.02em", lineHeight: 1.1 }}
           >
-            {/* Number */}
-            <span
+            Karya <span style={{ color: "var(--accent)" }}>Terpilih</span>
+          </h2>
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "11px",
+              color: "var(--muted)",
+              textTransform: "uppercase",
+              letterSpacing: "0.1em",
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+            }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--accent)")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--muted)")}
+          >
+            GitHub Profile ↗
+          </a>
+        </div>
+
+        {/* Project list */}
+        <div>
+          {projects.map((project, i) => (
+            <div
+              key={project.id}
+              className="group relative py-7 flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all duration-200 cursor-pointer"
               style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.75rem",
-                color: "var(--text-dim)",
-                letterSpacing: "0.05em",
+                borderTop: "1px solid var(--border)",
+                borderBottom: i === projects.length - 1 ? "1px solid var(--border)" : "none",
+                paddingLeft: hoveredId === project.id ? "16px" : "0",
               }}
+              onMouseEnter={() => setHoveredId(project.id)}
+              onMouseLeave={() => setHoveredId(null)}
             >
-              {project.number}
-            </span>
-
-            {/* Content */}
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.5rem" }}>
-                <h3
-                  style={{
-                    fontFamily: "'DM Serif Display', serif",
-                    fontSize: "clamp(1.2rem, 2vw, 1.6rem)",
-                    color: "var(--text)",
-                    fontWeight: 400,
-                  }}
-                >
-                  {project.title}
-                </h3>
-                {project.featured && (
-                  <span
-                    style={{
-                      padding: "0.15rem 0.5rem",
-                      background: "rgba(232,213,163,0.1)",
-                      border: "1px solid var(--accent)",
-                      borderRadius: "2px",
-                      fontSize: "0.6rem",
-                      color: "var(--accent)",
-                      fontFamily: "'DM Mono', monospace",
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    Featured
-                  </span>
-                )}
-              </div>
-              <p
+              {/* Accent line on hover */}
+              <div
+                className="absolute left-0 top-0 bottom-0 w-0.5 transition-all duration-200"
                 style={{
-                  fontSize: "0.85rem",
-                  color: "var(--text-muted)",
-                  maxWidth: "520px",
-                  lineHeight: 1.7,
-                  marginBottom: "0.75rem",
+                  background: "var(--accent)",
+                  opacity: hoveredId === project.id ? 1 : 0,
+                  transform: hoveredId === project.id ? "scaleY(1)" : "scaleY(0)",
                 }}
-              >
-                {project.description}
-              </p>
-              <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.65rem",
-                      color: "var(--text-dim)",
-                      padding: "0.15rem 0.4rem",
-                      border: "1px solid var(--border)",
-                      borderRadius: "2px",
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+              />
 
-            {/* Links */}
-            <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  color: "var(--text-muted)",
-                  textDecoration: "none",
-                  fontSize: "0.75rem",
-                  fontFamily: "'DM Mono', monospace",
-                  letterSpacing: "0.05em",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-              >
-                GitHub
-              </a>
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {/* Left: number + title + desc */}
+              <div className="flex items-start gap-6 flex-1">
+                <span
                   style={{
-                    color: "var(--accent)",
-                    textDecoration: "none",
-                    fontSize: "0.75rem",
                     fontFamily: "'DM Mono', monospace",
-                    letterSpacing: "0.05em",
-                    transition: "opacity 0.2s",
+                    fontSize: "11px",
+                    color: "var(--muted)",
+                    minWidth: "24px",
+                    marginTop: "4px",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                 >
-                  Live ↗
-                </a>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+                  {project.id}
+                </span>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 flex-wrap mb-2">
+                    <h3
+                      className="font-bold transition-colors duration-200"
+                      style={{
+                        fontSize: "clamp(18px, 2vw, 22px)",
+                        color: hoveredId === project.id ? "var(--accent)" : "var(--text)",
+                      }}
+                    >
+                      {project.title}
+                    </h3>
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "9px",
+                        color: "var(--muted)",
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid var(--border)",
+                        padding: "2px 8px",
+                        borderRadius: "100px",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.1em",
+                      }}
+                    >
+                      {project.category}
+                    </span>
+                    {project.featured && (
+                      <span
+                        style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: "9px",
+                          color: "#000",
+                          background: "var(--accent)",
+                          padding: "2px 8px",
+                          borderRadius: "100px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                          fontWeight: 700,
+                        }}
+                      >
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "12px",
+                      color: "var(--muted)",
+                      lineHeight: "1.7",
+                      maxWidth: "560px",
+                      fontWeight: 300,
+                    }}
+                  >
+                    {project.desc}
+                  </p>
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-2 mt-3">
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: "10px",
+                          color: hoveredId === project.id ? "var(--accent)" : "var(--muted)",
+                          padding: "2px 8px",
+                          border: "1px solid",
+                          borderColor: hoveredId === project.id ? "rgba(232,255,71,0.3)" : "var(--border)",
+                          borderRadius: "100px",
+                          transition: "all 0.2s",
+                        }}
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-      <style>{`
-        .project-row { transition: padding 0.3s ease, background 0.3s ease !important; }
-        @media (max-width: 640px) {
-          .project-row { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
+              {/* Right: year + links */}
+              <div
+                className="flex items-center gap-6 md:ml-8"
+                style={{ minWidth: "120px", justifyContent: "flex-end" }}
+              >
+                <span
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "11px",
+                    color: "var(--muted)",
+                  }}
+                >
+                  {project.year}
+                </span>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={project.github}
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "11px",
+                      color: "var(--muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                      transition: "color 0.2s",
+                    }}
+                    onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--text)")}
+                    onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--muted)")}
+                  >
+                    Code
+                  </a>
+                  <a
+                    href={project.link}
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "11px",
+                      color: hoveredId === project.id ? "var(--accent)" : "var(--muted)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                      transition: "color 0.2s",
+                    }}
+                  >
+                    Live ↗
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

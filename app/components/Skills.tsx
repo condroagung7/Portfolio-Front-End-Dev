@@ -1,194 +1,209 @@
 "use client";
 
-const skillCategories = [
-  {
-    title: "Frontend",
-    icon: "⬡",
-    skills: ["React.js", "Next.js", "TypeScript", "JavaScript (ES6+)", "HTML5 & CSS3", "Tailwind CSS"],
-  },
-  {
-    title: "Tools & Workflow",
-    icon: "⬡",
-    skills: ["Git & GitHub", "Vite", "Webpack", "Figma", "REST API", "GraphQL"],
-  },
-  {
-    title: "State & Data",
-    icon: "⬡",
-    skills: ["Zustand", "React Query", "Redux Toolkit", "Context API", "Axios", "SWR"],
-  },
-  {
-    title: "Testing & Deploy",
-    icon: "⬡",
-    skills: ["Jest", "React Testing Library", "Vercel", "Netlify", "Docker basics", "CI/CD"],
-  },
+const skills = [
+  { name: "React.js", level: 90, category: "Framework" },
+  { name: "Next.js", level: 85, category: "Framework" },
+  { name: "TypeScript", level: 82, category: "Language" },
+  { name: "Tailwind CSS", level: 92, category: "Styling" },
+  { name: "JavaScript", level: 88, category: "Language" },
+  { name: "Node.js", level: 70, category: "Backend" },
+  { name: "Git", level: 85, category: "Tools" },
+  { name: "Figma", level: 75, category: "Design" },
+  { name: "REST API", level: 88, category: "Integration" },
+  { name: "CSS3", level: 90, category: "Styling" },
+  { name: "HTML5", level: 95, category: "Markup" },
+  { name: "Framer Motion", level: 72, category: "Animation" },
 ];
 
 const techStack = [
-  "React", "Next.js", "TypeScript", "Tailwind", "Node.js", "Git",
-  "Vite", "Figma", "Vercel", "GraphQL", "Jest", "PostgreSQL"
+  "React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js",
+  "PostgreSQL", "Git", "Figma", "Vercel", "REST API", "Prisma",
+  "Redux", "Zustand", "React Query", "Vite", "Jest",
+  "React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js",
+  "PostgreSQL", "Git", "Figma", "Vercel", "REST API", "Prisma",
+  "Redux", "Zustand", "React Query", "Vite", "Jest",
 ];
 
 export default function Skills() {
   return (
-    <section
-      id="skills"
-      style={{
-        padding: "8rem 2rem",
-        background: "var(--bg-2)",
-        borderTop: "1px solid var(--border)",
-        borderBottom: "1px solid var(--border)",
-      }}
-    >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+    <section id="skills" className="py-32 px-6" style={{ background: "var(--surface)" }}>
+      <div className="max-w-6xl mx-auto">
         {/* Section label */}
         <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            marginBottom: "4rem",
-          }}
+          className="flex items-center gap-4 mb-16"
+          style={{ fontFamily: "'DM Mono', monospace" }}
         >
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.7rem",
-              color: "var(--accent)",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-            }}
-          >
-            02 / Skills
+          <span style={{ color: "var(--accent)", fontSize: "12px" }}>02</span>
+          <div style={{ width: "60px", height: "1px", background: "var(--accent)" }} />
+          <span style={{ fontSize: "11px", color: "var(--muted)", textTransform: "uppercase", letterSpacing: "0.15em" }}>
+            Skills & Tech
           </span>
-          <div style={{ flex: 1, height: "1px", background: "var(--border)" }} />
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: "5rem" }} className="skills-grid">
-          {/* Left */}
+        <div className="grid md:grid-cols-2 gap-16">
+          {/* Left: skill bars */}
           <div>
             <h2
-              style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: "clamp(2rem, 3.5vw, 3rem)",
-                lineHeight: 1.15,
-                marginBottom: "1rem",
-              }}
+              className="font-bold mb-10"
+              style={{ fontSize: "clamp(28px, 3vw, 40px)", letterSpacing: "-0.02em" }}
             >
-              Tech Stack &{" "}
-              <br />
-              <em style={{ color: "var(--accent)" }}>Keahlian</em>
+              Keahlian <span style={{ color: "var(--accent)" }}>Teknis</span>
             </h2>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", lineHeight: 1.8, marginBottom: "2rem" }}>
-              Saya terus belajar dan mengikuti perkembangan teknologi web modern.
-              Berikut teknologi yang saya kuasai.
-            </p>
-
-            {/* Scrolling tech tags */}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "0.5rem",
-              }}
-            >
-              {techStack.map((tech) => (
-                <span
-                  key={tech}
-                  style={{
-                    padding: "0.3rem 0.75rem",
-                    border: "1px solid var(--border)",
-                    borderRadius: "2px",
-                    fontSize: "0.75rem",
-                    fontFamily: "'DM Mono', monospace",
-                    color: "var(--text-muted)",
-                    transition: "border-color 0.2s, color 0.2s",
-                    cursor: "default",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = "var(--accent)";
-                    e.currentTarget.style.color = "var(--accent)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = "var(--border)";
-                    e.currentTarget.style.color = "var(--text-muted)";
-                  }}
-                >
-                  {tech}
-                </span>
+            <div className="flex flex-col gap-5">
+              {skills.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="font-semibold"
+                        style={{ fontSize: "14px" }}
+                      >
+                        {skill.name}
+                      </span>
+                      <span
+                        style={{
+                          fontFamily: "'DM Mono', monospace",
+                          fontSize: "9px",
+                          color: "var(--muted)",
+                          background: "rgba(255,255,255,0.05)",
+                          padding: "2px 6px",
+                          borderRadius: "100px",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.1em",
+                        }}
+                      >
+                        {skill.category}
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "11px",
+                        color: "var(--accent)",
+                      }}
+                    >
+                      {skill.level}%
+                    </span>
+                  </div>
+                  {/* Bar */}
+                  <div
+                    className="h-1 rounded-full overflow-hidden"
+                    style={{ background: "var(--border)" }}
+                  >
+                    <div
+                      className="h-full rounded-full"
+                      style={{
+                        width: `${skill.level}%`,
+                        background: `linear-gradient(90deg, var(--accent), rgba(232,255,71,0.5))`,
+                        transition: "width 1s ease",
+                      }}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Right: Category cards */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1rem",
-            }}
-          >
-            {skillCategories.map((cat) => (
-              <div
-                key={cat.title}
-                style={{
-                  background: "var(--bg)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "4px",
-                  padding: "1.5rem",
-                  transition: "border-color 0.2s, transform 0.2s",
-                  cursor: "default",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--accent)";
-                  e.currentTarget.style.transform = "translateY(-3px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--border)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
-              >
+          {/* Right: categories */}
+          <div>
+            <h2
+              className="font-bold mb-10"
+              style={{ fontSize: "clamp(28px, 3vw, 40px)", letterSpacing: "-0.02em" }}
+            >
+              Apa yang <span style={{ color: "var(--accent)" }}>Saya Lakukan</span>
+            </h2>
+            <div className="grid grid-cols-1 gap-4">
+              {[
+                {
+                  icon: "⬡",
+                  title: "Frontend Development",
+                  desc: "Membangun UI yang responsif, aksesibel, dan performan menggunakan React & Next.js.",
+                },
+                {
+                  icon: "◈",
+                  title: "UI/UX Implementation",
+                  desc: "Mentranslasikan desain dari Figma ke kode yang pixel-perfect dengan animasi halus.",
+                },
+                {
+                  icon: "◎",
+                  title: "API Integration",
+                  desc: "Menghubungkan frontend dengan REST API dan backend services menggunakan TypeScript.",
+                },
+                {
+                  icon: "◇",
+                  title: "Performance Optimization",
+                  desc: "Mengoptimalkan Core Web Vitals, lazy loading, dan bundle size untuk UX terbaik.",
+                },
+              ].map((item, i) => (
                 <div
+                  key={i}
+                  className="p-5 flex gap-4 items-start transition-all duration-200"
                   style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "0.7rem",
-                    color: "var(--accent)",
-                    marginBottom: "0.75rem",
-                    letterSpacing: "0.1em",
-                    textTransform: "uppercase",
+                    border: "1px solid var(--border)",
+                    borderRadius: "4px",
+                    background: "var(--bg)",
+                    cursor: "default",
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(232,255,71,0.3)";
+                    (e.currentTarget as HTMLElement).style.background = "rgba(232,255,71,0.03)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+                    (e.currentTarget as HTMLElement).style.background = "var(--bg)";
                   }}
                 >
-                  {cat.title}
-                </div>
-                <ul style={{ listStyle: "none" }}>
-                  {cat.skills.map((skill) => (
-                    <li
-                      key={skill}
+                  <span style={{ color: "var(--accent)", fontSize: "20px", lineHeight: 1, marginTop: "2px" }}>
+                    {item.icon}
+                  </span>
+                  <div>
+                    <div className="font-semibold mb-1" style={{ fontSize: "14px" }}>
+                      {item.title}
+                    </div>
+                    <div
                       style={{
-                        fontSize: "0.83rem",
-                        color: "var(--text-muted)",
-                        padding: "0.25rem 0",
-                        borderBottom: "1px solid var(--border)",
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "0.5rem",
+                        fontFamily: "'DM Mono', monospace",
+                        fontSize: "12px",
+                        color: "var(--muted)",
+                        lineHeight: "1.7",
+                        fontWeight: 300,
                       }}
                     >
-                      <span style={{ color: "var(--text-dim)", fontSize: "0.6rem" }}>▸</span>
-                      {skill}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+                      {item.desc}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .skills-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-        }
-      `}</style>
+      {/* Marquee tech stack */}
+      <div
+        className="mt-20 overflow-hidden"
+        style={{ borderTop: "1px solid var(--border)", paddingTop: "32px" }}
+      >
+        <div style={{ display: "flex", width: "max-content", animation: "marquee 30s linear infinite" }}>
+          {techStack.map((tech, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-6 mx-6"
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "12px",
+                color: "var(--muted)",
+                whiteSpace: "nowrap",
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+              }}
+            >
+              {tech}
+              <span style={{ color: "var(--accent)", opacity: 0.4 }}>·</span>
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

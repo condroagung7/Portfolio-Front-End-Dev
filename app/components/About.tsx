@@ -1,207 +1,186 @@
 "use client";
 
-const stats = [
-  { value: "2+", label: "Tahun Experience" },
-  { value: "20+", label: "Proyek Selesai" },
-  { value: "10+", label: "Klien Puas" },
-  { value: "100%", label: "Dedikasi" },
-];
-
 export default function About() {
   return (
-    <section
-      id="about"
-      style={{
-        padding: "8rem 2rem",
-        maxWidth: "1100px",
-        margin: "0 auto",
-      }}
-    >
-      {/* Section label */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "1rem",
-          marginBottom: "4rem",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "'DM Mono', monospace",
-            fontSize: "0.7rem",
-            color: "var(--accent)",
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-          }}
-        >
-          01 / About
-        </span>
+    <section id="about" className="py-32 px-6">
+      <div className="max-w-6xl mx-auto">
+        {/* Section label */}
         <div
-          style={{
-            flex: 1,
-            height: "1px",
-            background: "var(--border)",
-          }}
-        />
-      </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "5rem",
-          alignItems: "start",
-        }}
-        className="about-grid"
-      >
-        {/* Left: Text */}
-        <div>
-          <h2
+          className="flex items-center gap-4 mb-16"
+          style={{ fontFamily: "'DM Mono', monospace" }}
+        >
+          <span style={{ color: "var(--accent)", fontSize: "12px" }}>01</span>
+          <div style={{ width: "60px", height: "1px", background: "var(--accent)" }} />
+          <span
             style={{
-              fontFamily: "'DM Serif Display', serif",
-              fontSize: "clamp(2rem, 4vw, 3.5rem)",
-              lineHeight: 1.1,
-              marginBottom: "1.5rem",
-              color: "var(--text)",
+              fontSize: "11px",
+              color: "var(--muted)",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
             }}
           >
-            Saya suka membuat hal-hal{" "}
-            <em style={{ color: "var(--accent)", fontStyle: "italic" }}>
-              yang hidup
-            </em>{" "}
-            di web.
-          </h2>
-
-          <p
-            style={{
-              color: "var(--text-muted)",
-              lineHeight: 1.8,
-              marginBottom: "1.25rem",
-              fontSize: "0.95rem",
-            }}
-          >
-            Saya adalah frontend developer berbasis di Balikpapan yang passionate
-            membangun pengalaman digital yang estetis dan fungsional. Saya fokus pada
-            detail, performa, dan user experience.
-          </p>
-          <p
-            style={{
-              color: "var(--text-muted)",
-              lineHeight: 1.8,
-              fontSize: "0.95rem",
-              marginBottom: "2rem",
-            }}
-          >
-            Dengan background di React ecosystem, saya suka menerjemahkan desain
-            menjadi kode yang bersih, maintainable, dan accessible.
-          </p>
-
-          <a
-            href="/cv.pdf"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              color: "var(--accent)",
-              textDecoration: "none",
-              fontSize: "0.85rem",
-              fontFamily: "'DM Mono', monospace",
-              letterSpacing: "0.05em",
-              borderBottom: "1px solid var(--accent)",
-              paddingBottom: "2px",
-              transition: "opacity 0.2s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.7")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-          >
-            Download CV →
-          </a>
+            About Me
+          </span>
         </div>
 
-        {/* Right: Stats + Card */}
-        <div>
-          <div
-            style={{
-              background: "var(--bg-2)",
-              border: "1px solid var(--border)",
-              borderRadius: "4px",
-              padding: "2rem",
-              marginBottom: "1.5rem",
-            }}
-          >
-            <div
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+          {/* Text side */}
+          <div>
+            <h2
+              className="font-bold mb-6"
               style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "1.5rem",
+                fontSize: "clamp(32px, 4vw, 52px)",
+                lineHeight: "1.1",
+                letterSpacing: "-0.02em",
               }}
             >
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <div
-                    style={{
-                      fontFamily: "'DM Serif Display', serif",
-                      fontSize: "2.5rem",
-                      color: "var(--accent)",
-                      lineHeight: 1,
-                      marginBottom: "0.25rem",
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.78rem",
-                      color: "var(--text-muted)",
-                      letterSpacing: "0.03em",
-                    }}
-                  >
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+              Saya membangun
+              <br />
+              <span style={{ color: "var(--accent)" }}>antarmuka</span> yang
+              <br />
+              bermakna.
+            </h2>
+            <div
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "13px",
+                color: "var(--muted)",
+                lineHeight: "1.9",
+                fontWeight: 300,
+              }}
+            >
+              <p className="mb-4">
+                Berbasis di{" "}
+                <span style={{ color: "var(--text)" }}>Balikpapan, Indonesia</span>, saya
+                adalah seorang frontend developer yang berfokus pada pembuatan
+                produk digital yang menggabungkan estetika dan fungsionalitas.
+              </p>
+              <p className="mb-4">
+                Saya bekerja dengan{" "}
+                <span style={{ color: "var(--accent)" }}>React</span>,{" "}
+                <span style={{ color: "var(--accent)" }}>Next.js</span>, dan{" "}
+                <span style={{ color: "var(--accent)" }}>TypeScript</span> untuk
+                membangun aplikasi web yang performan, skalabel, dan mudah
+                digunakan.
+              </p>
+              <p>
+                Ketika tidak sedang coding, saya senang menjelajahi tren desain
+                terbaru dan belajar teknologi baru untuk meningkatkan skill saya.
+              </p>
             </div>
           </div>
 
-          {/* Currently */}
-          <div
-            style={{
-              border: "1px solid var(--border)",
-              borderRadius: "4px",
-              padding: "1.25rem 1.5rem",
-              display: "flex",
-              gap: "1rem",
-              alignItems: "flex-start",
-            }}
-          >
-            <span style={{ fontSize: "1.25rem" }}>📍</span>
-            <div>
+          {/* Right side - decorative card */}
+          <div className="relative">
+            <div
+              className="relative p-8"
+              style={{
+                border: "1px solid var(--border)",
+                borderRadius: "4px",
+                background: "var(--surface)",
+              }}
+            >
+              {/* Accent corner */}
+              <div
+                className="absolute top-0 right-0 w-16 h-16"
+                style={{
+                  background: "var(--accent)",
+                  clipPath: "polygon(100% 0, 0 0, 100% 100%)",
+                  opacity: 0.15,
+                }}
+              />
+
               <div
                 style={{
                   fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.7rem",
-                  color: "var(--text-dim)",
-                  letterSpacing: "0.1em",
-                  marginBottom: "0.25rem",
+                  fontSize: "11px",
+                  color: "var(--accent)",
                   textTransform: "uppercase",
+                  letterSpacing: "0.15em",
+                  marginBottom: "24px",
                 }}
               >
-                Currently
+                // current_focus.ts
               </div>
-              <div style={{ fontSize: "0.9rem", color: "var(--text)" }}>
-                Balikpapan, Kalimantan Timur
+
+              {[
+                {
+                  label: "Primary Stack",
+                  value: "React · Next.js · TypeScript",
+                },
+                { label: "Styling", value: "Tailwind CSS · Framer Motion" },
+                { label: "Backend", value: "Node.js · REST API · Prisma" },
+                { label: "Tools", value: "Git · Figma · Vercel" },
+                { label: "Learning", value: "Three.js · GSAP · tRPC" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex justify-between items-start py-3"
+                  style={{
+                    borderTop: i === 0 ? "none" : "1px solid var(--border)",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "11px",
+                      color: "var(--muted)",
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "11px",
+                      color: "var(--text)",
+                      textAlign: "right",
+                      maxWidth: "200px",
+                    }}
+                  >
+                    {item.value}
+                  </span>
+                </div>
+              ))}
+
+              {/* Bottom status */}
+              <div
+                className="flex items-center gap-2 mt-6 pt-4"
+                style={{ borderTop: "1px solid var(--border)" }}
+              >
+                <span
+                  className="w-2 h-2 rounded-full"
+                  style={{ background: "#4ade80", boxShadow: "0 0 6px #4ade80" }}
+                />
+                <span
+                  style={{
+                    fontFamily: "'DM Mono', monospace",
+                    fontSize: "11px",
+                    color: "var(--muted)",
+                  }}
+                >
+                  Open to new opportunities
+                </span>
               </div>
+            </div>
+
+            {/* Floating badge */}
+            <div
+              className="absolute -bottom-4 -left-4 px-4 py-2 animate-float"
+              style={{
+                background: "var(--accent)",
+                borderRadius: "2px",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "11px",
+                fontWeight: 700,
+                color: "#000",
+              }}
+            >
+              Based in 🇮🇩 Indonesia
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .about-grid { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-        }
-      `}</style>
     </section>
   );
 }

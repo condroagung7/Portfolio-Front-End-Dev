@@ -1,12 +1,11 @@
 "use client";
-
 import { useState, useEffect } from "react";
 
 const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -14,168 +13,137 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? "py-4" : "py-6"
+      }`}
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        padding: "0 2rem",
-        height: "60px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        transition: "background 0.3s, border-color 0.3s",
         background: scrolled ? "rgba(10,10,10,0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+        backdropFilter: scrolled ? "blur(16px)" : "none",
+        borderBottom: scrolled ? "1px solid #1e1e1e" : "none",
       }}
     >
-      {/* Logo */}
-      <a
-        href="#"
-        style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: "0.9rem",
-          color: "var(--accent)",
-          textDecoration: "none",
-          letterSpacing: "0.05em",
-        }}
-      >
-        Portfolio Agung.Dev
-      </a>
+      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        {/* Logo */}
+        <a
+          href="#"
+          className="font-bold text-lg tracking-tight"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
+          <span style={{ color: "var(--accent)" }}>C</span>ondro
+          <span style={{ color: "var(--accent)" }}>.</span>
+        </a>
 
-      {/* Desktop Nav */}
-      <ul
-        style={{
-          display: "flex",
-          gap: "2.5rem",
-          listStyle: "none",
-          alignItems: "center",
-        }}
-        className="desktop-nav"
-      >
-        {navLinks.map((link) => (
-          <li key={link.href}>
-            <a
-              href={link.href}
-              style={{
-                color: "var(--text-muted)",
-                textDecoration: "none",
-                fontSize: "0.85rem",
-                letterSpacing: "0.03em",
-                transition: "color 0.2s",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-        <li>
-          <a
-            href="#contact"
-            style={{
-              padding: "0.4rem 1.1rem",
-              border: "1px solid var(--accent)",
-              color: "var(--accent)",
-              textDecoration: "none",
-              fontSize: "0.8rem",
-              borderRadius: "2px",
-              letterSpacing: "0.05em",
-              transition: "background 0.2s, color 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--accent)";
-              e.currentTarget.style.color = "var(--bg)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = "var(--accent)";
-            }}
-          >
-            Hire Me
-          </a>
-        </li>
-      </ul>
-
-      {/* Mobile Hamburger */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        style={{
-          display: "none",
-          background: "none",
-          border: "none",
-          color: "var(--text)",
-          cursor: "pointer",
-          padding: "4px",
-        }}
-        className="mobile-menu-btn"
-        aria-label="Toggle menu"
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-          {[0, 1, 2].map((i) => (
-            <span
-              key={i}
-              style={{
-                display: "block",
-                width: "22px",
-                height: "1px",
-                background: "var(--text)",
-                transition: "transform 0.3s",
-              }}
-            />
+        {/* Desktop nav */}
+        <ul className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a
+                href={link.href}
+                className="text-sm tracking-widest uppercase transition-colors duration-200"
+                style={{
+                  color: "var(--muted)",
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "11px",
+                }}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.color = "var(--accent)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "var(--muted)")
+                }
+              >
+                {link.label}
+              </a>
+            </li>
           ))}
-        </div>
-      </button>
+        </ul>
 
-      {/* Mobile Menu */}
+        {/* CTA */}
+        <a
+          href="/resume.pdf"
+          className="hidden md:flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-semibold transition-all duration-200"
+          style={{
+            border: "1px solid var(--accent)",
+            color: "var(--accent)",
+            fontFamily: "'DM Mono', monospace",
+            borderRadius: "2px",
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = "var(--accent)";
+            (e.currentTarget as HTMLElement).style.color = "#000";
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = "transparent";
+            (e.currentTarget as HTMLElement).style.color = "var(--accent)";
+          }}
+        >
+          Resume ↗
+        </a>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-2"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span
+            className="block w-6 h-0.5 transition-all duration-300"
+            style={{
+              background: "var(--text)",
+              transform: menuOpen ? "translateY(8px) rotate(45deg)" : "none",
+            }}
+          />
+          <span
+            className="block w-6 h-0.5 transition-all duration-300"
+            style={{
+              background: "var(--text)",
+              opacity: menuOpen ? 0 : 1,
+            }}
+          />
+          <span
+            className="block w-6 h-0.5 transition-all duration-300"
+            style={{
+              background: "var(--text)",
+              transform: menuOpen ? "translateY(-8px) rotate(-45deg)" : "none",
+            }}
+          />
+        </button>
+      </div>
+
+      {/* Mobile menu */}
       {menuOpen && (
         <div
+          className="md:hidden mt-4 mx-6 p-6 flex flex-col gap-4"
           style={{
-            position: "fixed",
-            inset: 0,
-            background: "var(--bg)",
-            zIndex: 40,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "2rem",
+            background: "var(--surface)",
+            border: "1px solid var(--border)",
+            borderRadius: "4px",
           }}
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setMenuOpen(false)}
+              className="text-sm uppercase tracking-widest"
               style={{
-                color: "var(--text)",
-                textDecoration: "none",
-                fontSize: "1.5rem",
-                fontFamily: "'DM Serif Display', serif",
+                color: "var(--muted)",
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "12px",
               }}
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </a>
           ))}
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 640px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: block !important; }
-        }
-      `}</style>
     </nav>
   );
 }

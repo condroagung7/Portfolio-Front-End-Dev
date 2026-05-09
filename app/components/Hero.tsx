@@ -1,221 +1,280 @@
 "use client";
+import { useEffect, useState } from "react";
 
-import { useEffect, useRef } from "react";
+const roles = [
+  "Frontend Developer",
+  "React Enthusiast",
+  "UI/UX Craftsman",
+  "Next.js Builder",
+];
 
 export default function Hero() {
-  const lineRef = useRef<HTMLDivElement>(null);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [typing, setTyping] = useState(true);
 
   useEffect(() => {
-    if (lineRef.current) {
-      lineRef.current.style.width = "100%";
+    const current = roles[roleIndex];
+    if (typing) {
+      if (displayed.length < current.length) {
+        const t = setTimeout(
+          () => setDisplayed(current.slice(0, displayed.length + 1)),
+          60
+        );
+        return () => clearTimeout(t);
+      } else {
+        const t = setTimeout(() => setTyping(false), 1800);
+        return () => clearTimeout(t);
+      }
+    } else {
+      if (displayed.length > 0) {
+        const t = setTimeout(
+          () => setDisplayed(displayed.slice(0, -1)),
+          35
+        );
+        return () => clearTimeout(t);
+      } else {
+        setRoleIndex((i) => (i + 1) % roles.length);
+        setTyping(true);
+      }
     }
-  }, []);
+  }, [displayed, typing, roleIndex]);
 
   return (
     <section
-      id="hero"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        padding: "6rem 2rem 4rem",
-        maxWidth: "1100px",
-        margin: "0 auto",
-        position: "relative",
-      }}
+      className="relative min-h-screen flex flex-col justify-center px-6"
+      style={{ paddingTop: "100px" }}
     >
-      {/* Decorative grid lines */}
+      {/* Grid background */}
       <div
+        className="absolute inset-0 pointer-events-none"
         style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage:
-            "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-          opacity: 0.3,
-          pointerEvents: "none",
+          backgroundImage: `
+            linear-gradient(rgba(232,255,71,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(232,255,71,0.03) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
         }}
       />
 
-      {/* Top label */}
+      {/* Glow blob */}
       <div
-        className="animate-fade-up opacity-0 delay-1"
+        className="absolute pointer-events-none"
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "0.75rem",
-          marginBottom: "2rem",
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle, rgba(232,255,71,0.06) 0%, transparent 70%)",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -60%)",
+          filter: "blur(40px)",
         }}
-      >
-        <span
+      />
+
+      <div className="max-w-6xl mx-auto w-full relative z-10">
+        {/* Status badge */}
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1.5 mb-8 animate-fade-in opacity-0-init"
           style={{
-            display: "inline-block",
-            width: "8px",
-            height: "8px",
-            borderRadius: "50%",
-            background: "var(--green)",
-            boxShadow: "0 0 8px var(--green)",
-          }}
-        />
-        <span
-          style={{
+            border: "1px solid var(--border)",
+            borderRadius: "100px",
+            background: "var(--surface)",
+            fontSize: "11px",
             fontFamily: "'DM Mono', monospace",
-            fontSize: "0.75rem",
-            color: "var(--text-muted)",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
+            color: "var(--muted)",
           }}
         >
+          <span
+            className="w-2 h-2 rounded-full"
+            style={{ background: "#4ade80", boxShadow: "0 0 6px #4ade80" }}
+          />
           Available for work
-        </span>
-      </div>
+        </div>
 
-      {/* Main heading */}
-      <div style={{ position: "relative", zIndex: 1 }}>
+        {/* Main heading */}
         <h1
-          className="animate-fade-up opacity-0 delay-2"
+          className="font-bold leading-none mb-4 animate-fade-up opacity-0-init delay-100"
           style={{
-            fontFamily: "'DM Serif Display', serif",
-            fontSize: "clamp(3rem, 8vw, 7rem)",
-            lineHeight: 1.0,
-            letterSpacing: "-0.02em",
-            color: "var(--text)",
-            marginBottom: "0.1em",
+            fontSize: "clamp(48px, 8vw, 110px)",
+            letterSpacing: "-0.03em",
+            lineHeight: "0.95",
           }}
         >
           Frontend
+          <br />
+          <span style={{ color: "var(--accent)" }}>Developer</span>
+          <span
+            style={{
+              display: "inline-block",
+              width: "8px",
+              height: "clamp(40px, 6vw, 80px)",
+              background: "var(--accent)",
+              marginLeft: "4px",
+              verticalAlign: "middle",
+              borderRadius: "2px",
+              animation: "blink 1s step-end infinite",
+            }}
+          />
         </h1>
-        <h1
-          className="animate-fade-up opacity-0 delay-3"
-          style={{
-            fontFamily: "'DM Serif Display', serif",
-            fontSize: "clamp(3rem, 8vw, 7rem)",
-            lineHeight: 1.0,
-            letterSpacing: "-0.02em",
-            color: "transparent",
-            WebkitTextStroke: "1px var(--accent)",
-            marginBottom: "0.2em",
-          }}
-        >
-          Developer.
-        </h1>
-
-        {/* Animated line */}
-        <div
-          style={{
-            height: "1px",
-            background: "linear-gradient(90deg, var(--accent), transparent)",
-            width: "0%",
-            transition: "width 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.6s",
-            marginBottom: "2rem",
-          }}
-          ref={lineRef}
-        />
 
         {/* Subtitle */}
         <p
-          className="animate-fade-up opacity-0 delay-5"
+          className="mb-6 animate-fade-up opacity-0-init delay-200"
           style={{
-            fontSize: "clamp(1rem, 2vw, 1.2rem)",
-            color: "var(--text-muted)",
-            maxWidth: "520px",
-            lineHeight: 1.7,
-            marginBottom: "3rem",
+            fontSize: "clamp(14px, 2vw, 18px)",
+            color: "var(--muted)",
+            maxWidth: "480px",
+            lineHeight: "1.7",
+            fontFamily: "'DM Mono', monospace",
+            fontWeight: 300,
           }}
         >
-          Halo, saya{" "}
-          <span style={{ color: "var(--accent)", fontWeight: 500 }}>Condro</span>
-          . Saya membangun antarmuka web yang cepat, bersih, dan berkesan menggunakan
-          React, Next.js, dan TypeScript.
+          Hi, saya{" "}
+          <span style={{ color: "var(--text)", fontWeight: 500 }}>Condro</span>
+          . Saya membangun pengalaman web yang{" "}
+          <span style={{ color: "var(--accent)" }}>cepat</span>,{" "}
+          <span style={{ color: "var(--accent)" }}>aksesibel</span>, dan{" "}
+          <span style={{ color: "var(--accent)" }}>indah</span> menggunakan
+          teknologi modern.
         </p>
 
-        {/* CTA Buttons */}
+        {/* Role typewriter */}
         <div
-          className="animate-fade-up opacity-0 delay-6"
-          style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
+          className="mb-10 animate-fade-up opacity-0-init delay-300"
+          style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: "14px",
+            color: "var(--muted)",
+          }}
         >
+          <span style={{ color: "var(--accent)" }}>$ </span>
+          <span style={{ color: "var(--text)" }}>{displayed}</span>
+          <span
+            style={{
+              display: "inline-block",
+              width: "2px",
+              height: "16px",
+              background: "var(--accent)",
+              verticalAlign: "middle",
+              animation: "blink 1s step-end infinite",
+            }}
+          />
+        </div>
+
+        {/* CTAs */}
+        <div className="flex flex-wrap gap-4 animate-fade-up opacity-0-init delay-400">
           <a
             href="#projects"
+            className="px-6 py-3 font-semibold text-sm tracking-widest uppercase transition-all duration-200"
             style={{
-              padding: "0.75rem 2rem",
               background: "var(--accent)",
-              color: "var(--bg)",
-              textDecoration: "none",
-              fontSize: "0.85rem",
-              fontWeight: 500,
-              letterSpacing: "0.05em",
+              color: "#000",
               borderRadius: "2px",
-              transition: "transform 0.2s, box-shadow 0.2s",
-              display: "inline-block",
+              fontFamily: "'DM Mono', monospace",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow = "0 8px 24px rgba(232,213,163,0.2)";
+              (e.currentTarget as HTMLElement).style.transform =
+                "translateY(-2px)";
+              (e.currentTarget as HTMLElement).style.boxShadow =
+                "0 8px 30px var(--accent-glow)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "none";
+              (e.currentTarget as HTMLElement).style.transform = "none";
+              (e.currentTarget as HTMLElement).style.boxShadow = "none";
             }}
           >
-            Lihat Proyek
+            View Work
           </a>
           <a
             href="#contact"
+            className="px-6 py-3 font-semibold text-sm tracking-widest uppercase transition-all duration-200"
             style={{
-              padding: "0.75rem 2rem",
               border: "1px solid var(--border)",
-              color: "var(--text-muted)",
-              textDecoration: "none",
-              fontSize: "0.85rem",
-              letterSpacing: "0.05em",
+              color: "var(--text)",
               borderRadius: "2px",
-              transition: "border-color 0.2s, color 0.2s",
-              display: "inline-block",
+              fontFamily: "'DM Mono', monospace",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "var(--text-muted)";
-              e.currentTarget.style.color = "var(--text)";
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--accent)";
+              (e.currentTarget as HTMLElement).style.color = "var(--accent)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "var(--border)";
-              e.currentTarget.style.color = "var(--text-muted)";
+              (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
+              (e.currentTarget as HTMLElement).style.color = "var(--text)";
             }}
           >
-            Hubungi Saya
+            Get In Touch
           </a>
+        </div>
+
+        {/* Stats row */}
+        <div
+          className="mt-16 pt-10 flex flex-wrap gap-10 animate-fade-up opacity-0-init delay-500"
+          style={{ borderTop: "1px solid var(--border)" }}
+        >
+          {[
+            { num: "2+", label: "Years Exp." },
+            { num: "20+", label: "Projects Built" },
+            { num: "10+", label: "Happy Clients" },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div
+                className="font-bold"
+                style={{
+                  fontSize: "32px",
+                  color: "var(--accent)",
+                  lineHeight: 1,
+                }}
+              >
+                {stat.num}
+              </div>
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "var(--muted)",
+                  fontFamily: "'DM Mono', monospace",
+                  marginTop: "4px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.1em",
+                }}
+              >
+                {stat.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div
-        className="animate-fade-in opacity-0 delay-7"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-fade-in opacity-0-init delay-700"
         style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: "50%",
-          transform: "translateX(-50%)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          gap: "0.5rem",
+          gap: "8px",
         }}
       >
-        <span
+        <div
           style={{
             fontFamily: "'DM Mono', monospace",
-            fontSize: "0.65rem",
-            color: "var(--text-dim)",
-            letterSpacing: "0.1em",
+            fontSize: "10px",
+            color: "var(--muted)",
+            letterSpacing: "0.2em",
+            textTransform: "uppercase",
           }}
         >
-          scroll
-        </span>
+          Scroll
+        </div>
         <div
+          className="animate-float"
           style={{
             width: "1px",
             height: "40px",
-            background: "linear-gradient(var(--border), transparent)",
+            background:
+              "linear-gradient(to bottom, var(--accent), transparent)",
           }}
         />
       </div>
