@@ -67,7 +67,7 @@ export default function Navbar() {
 
         {/* CTA */}
         <a
-          href="/resume.pdf"
+          href="https://drive.google.com/file/d/10DxUciqhcTw7le0p50YNp9EQ1yEXBw_K/view?usp=sharing"
           className="hidden md:flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-semibold transition-all duration-200"
           style={{
             border: "1px solid var(--accent)",
@@ -84,7 +84,7 @@ export default function Navbar() {
             (e.currentTarget as HTMLElement).style.color = "var(--accent)";
           }}
         >
-          Resume ↗
+          Hire Me ↗
         </a>
 
         {/* Mobile hamburger */}
