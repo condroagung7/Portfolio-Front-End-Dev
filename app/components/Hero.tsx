@@ -134,8 +134,8 @@ export default function Hero() {
           <span style={{ color: "var(--text)", fontWeight: 500 }}>Agung</span>
           . Saya membangun pengalaman web yang{" "}
           <span style={{ color: "var(--accent)" }}>cepat</span>,{" "}
-          <span style={{ color: "var(--accent)" }}>aksesibel</span>, dan{" "}
-          <span style={{ color: "var(--accent)" }}>indah</span> menggunakan
+          <span style={{ color: "var(--accent)" }}>clean</span>, dan{" "}
+          <span style={{ color: "var(--accent)" }}>optimal</span> menggunakan
           teknologi modern.
         </p>
 
@@ -216,7 +216,7 @@ export default function Hero() {
           {[
             { num: "1+", label: "Years Exp." },
             { num: "3+", label: "Projects Built" },
-            { num: "3+", label: "Happy Clients" },
+            
           ].map((stat) => (
             <div key={stat.label}>
               <div

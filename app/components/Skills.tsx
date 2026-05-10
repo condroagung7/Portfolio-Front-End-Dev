@@ -10,18 +10,15 @@ const skills = [
   { name: "Git", level: 85, category: "Tools" },
   { name: "Figma", level: 75, category: "Design" },
   { name: "REST API", level: 88, category: "Integration" },
-  { name: "CSS3", level: 90, category: "Styling" },
-  { name: "HTML5", level: 95, category: "Markup" },
-  { name: "Framer Motion", level: 72, category: "Animation" },
 ];
 
 const techStack = [
   "React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js",
   "PostgreSQL", "Git", "Figma", "Vercel", "REST API", "Prisma",
-  "Redux", "Zustand", "React Query", "Vite", "Jest",
+  "Redux", "Vite", "Jest",
   "React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js",
   "PostgreSQL", "Git", "Figma", "Vercel", "REST API", "Prisma",
-  "Redux", "Zustand", "React Query", "Vite", "Jest",
+  "Redux",   "Vite", "Jest",
 ];
 
 export default function Skills() {

@@ -51,9 +51,10 @@ export default function About() {
             >
               <p className="mb-4">
                 Berbasis di{" "}
-                <span style={{ color: "var(--text)" }}>Balikpapan, Indonesia</span>, saya
-                adalah seorang frontend developer yang berfokus pada pembuatan
-                produk digital yang menggabungkan estetika dan fungsionalitas.
+                <span style={{ color: "var(--text)" }}>Malang, Indonesia</span>, Saya adalah seorang Front-End 
+                Web Developer yang berfokus pada pembuatan website modern, responsif, dan interaktif 
+                dengan pengalaman pengguna yang optimal. Saya memiliki passion dalam mengubah desain menjadi 
+                aplikasi web yang cepat, clean, dan scalable menggunakan teknologi terbaru.
               </p>
               <p className="mb-4">
                 Saya bekerja dengan{" "}
@@ -108,10 +109,10 @@ export default function About() {
                   label: "Primary Stack",
                   value: "React · Next.js · TypeScript",
                 },
-                { label: "Styling", value: "Tailwind CSS · Framer Motion" },
-                { label: "Backend", value: "Node.js · REST API · Prisma" },
+                { label: "Styling", value: "Tailwind CSS · React bits" },
+                { label: "Backend", value: "Node.js · REST API · Supabase" },
                 { label: "Tools", value: "Git · Figma · Vercel" },
-                { label: "Learning", value: "Three.js · GSAP · tRPC" },
+                { label: "Learning", value: "Framer Motion" },
               ].map((item, i) => (
                 <div
                   key={i}
