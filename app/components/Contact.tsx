@@ -38,7 +38,7 @@ export default function Contact() {
           </span>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-3 gap-16 ">
           {/* Left */}
           <div>
             <h2
@@ -75,9 +75,8 @@ export default function Contact() {
             <div className="flex flex-col gap-4">
               {[
                 { label: "Email", value: "condro@example.com", href: "mailto:condro@example.com" },
-                { label: "GitHub", value: "github.com/condro", href: "#" },
-                { label: "LinkedIn", value: "linkedin.com/in/condro", href: "#" },
-                { label: "Twitter", value: "@condrodev", href: "#" },
+                { label: "LinkedIn", value: "linkedin.com/in/condro", href: "https://www.linkedin.com/in/condro-agung-utomo/" },
+                { label: "Instagram", value: "@condroagung", href: "https://www.instagram.com/condroagung/" },
               ].map((item) => (
                 <a
                   key={item.label}
@@ -124,167 +123,8 @@ export default function Contact() {
               ))}
             </div>
           </div>
-
-          {/* Right: form */}
-          <div>
-            {status === "sent" ? (
-              <div
-                className="h-full flex flex-col items-center justify-center text-center p-12"
-                style={{
-                  border: "1px solid rgba(232,255,71,0.3)",
-                  borderRadius: "4px",
-                  background: "rgba(232,255,71,0.03)",
-                }}
-              >
-                <div
-                  style={{ fontSize: "48px", marginBottom: "16px" }}
-                >
-                  ✓
-                </div>
-                <h3
-                  className="font-bold mb-3"
-                  style={{ fontSize: "24px", color: "var(--accent)" }}
-                >
-                  Pesan Terkirim!
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "13px",
-                    color: "var(--muted)",
-                    lineHeight: "1.7",
-                    fontWeight: 300,
-                  }}
-                >
-                  Terima kasih sudah menghubungi saya. Saya akan membalas dalam 1–2 hari kerja.
-                </p>
-              </div>
-            ) : (
-              <div className="flex flex-col gap-5">
-                {[
-                  { key: "name", label: "Nama", placeholder: "Nama lengkap kamu", type: "text" },
-                  { key: "email", label: "Email", placeholder: "email@example.com", type: "email" },
-                ].map((field) => (
-                  <div key={field.key}>
-                    <label
-                      style={{
-                        display: "block",
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: "10px",
-                        color: "var(--muted)",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.1em",
-                        marginBottom: "8px",
-                      }}
-                    >
-                      {field.label}
-                    </label>
-                    <input
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      value={form[field.key as "name" | "email"]}
-                      onChange={(e) =>
-                        setForm({ ...form, [field.key]: e.target.value })
-                      }
-                      style={{
-                        width: "100%",
-                        background: "var(--bg)",
-                        border: "1px solid var(--border)",
-                        borderRadius: "2px",
-                        padding: "12px 16px",
-                        fontFamily: "'DM Mono', monospace",
-                        fontSize: "13px",
-                        color: "var(--text)",
-                        outline: "none",
-                        transition: "border-color 0.2s",
-                      }}
-                      onFocus={(e) =>
-                        (e.target.style.borderColor = "rgba(232,255,71,0.4)")
-                      }
-                      onBlur={(e) =>
-                        (e.target.style.borderColor = "var(--border)")
-                      }
-                    />
-                  </div>
-                ))}
-
-                <div>
-                  <label
-                    style={{
-                      display: "block",
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "10px",
-                      color: "var(--muted)",
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    Pesan
-                  </label>
-                  <textarea
-                    placeholder="Ceritakan tentang proyekmu..."
-                    rows={5}
-                    value={form.message}
-                    onChange={(e) =>
-                      setForm({ ...form, message: e.target.value })
-                    }
-                    style={{
-                      width: "100%",
-                      background: "var(--bg)",
-                      border: "1px solid var(--border)",
-                      borderRadius: "2px",
-                      padding: "12px 16px",
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "13px",
-                      color: "var(--text)",
-                      outline: "none",
-                      resize: "none",
-                      transition: "border-color 0.2s",
-                    }}
-                    onFocus={(e) =>
-                      (e.target.style.borderColor = "rgba(232,255,71,0.4)")
-                    }
-                    onBlur={(e) =>
-                      (e.target.style.borderColor = "var(--border)")
-                    }
-                  />
-                </div>
-
-                <button
-                  onClick={handleSubmit}
-                  disabled={status === "sending"}
-                  style={{
-                    width: "100%",
-                    padding: "14px",
-                    background:
-                      status === "sending" ? "rgba(232,255,71,0.5)" : "var(--accent)",
-                    color: "#000",
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    textTransform: "uppercase",
-                    letterSpacing: "0.15em",
-                    border: "none",
-                    borderRadius: "2px",
-                    cursor: status === "sending" ? "not-allowed" : "pointer",
-                    transition: "all 0.2s",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (status !== "sending")
-                      (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)";
-                  }}
-                  onMouseLeave={(e) => {
-                    (e.currentTarget as HTMLElement).style.transform = "none";
-                  }}
-                >
-                  {status === "sending" ? "Mengirim..." : "Kirim Pesan →"}
-                </button>
-              </div>
-            )}
           </div>
         </div>
-      </div>
     </section>
   );
 }

@@ -29,21 +29,6 @@ export default function Footer() {
             fontSize: "11px",
           }}
         >
-          {["GitHub", "LinkedIn", "Twitter", "Email"].map((link) => (
-            <a
-              key={link}
-              href="#"
-              style={{ color: "var(--muted)", textDecoration: "none" }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "var(--accent)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "var(--muted)")
-              }
-            >
-              {link}
-            </a>
-          ))}
         </div>
 
         <div
@@ -53,7 +38,7 @@ export default function Footer() {
             color: "var(--muted)",
           }}
         >
-          <span style={{ color: "var(--accent)" }}>⬡</span> Balikpapan, ID
+          <span style={{ color: "var(--accent)" }}>⬡</span> Malang, ID
         </div>
       </div>
     </footer>
