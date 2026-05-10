@@ -36,8 +36,8 @@ export default function Navbar() {
           className="font-bold text-lg tracking-tight"
           style={{ fontFamily: "'Syne', sans-serif" }}
         >
-          <span style={{ color: "var(--accent)" }}>C</span>ondro
-          <span style={{ color: "var(--accent)" }}>.</span>
+          <span style={{ color: "var(--accent) " }}>A</span>gung
+          <span style={{ color: "var(--accent)" }}>.dev</span>
         </a>
 
         {/* Desktop nav */}
@@ -84,7 +84,7 @@ export default function Navbar() {
             (e.currentTarget as HTMLElement).style.color = "var(--accent)";
           }}
         >
-          Hire Me ↗
+          Download my CV ↗
         </a>
 
         {/* Mobile hamburger */}

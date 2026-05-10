@@ -102,8 +102,7 @@ export default function Hero() {
             lineHeight: "0.95",
           }}
         >
-          Frontend
-          <br />
+          <div>Frontend</div>
           <span style={{ color: "var(--accent)" }}>Developer</span>
           <span
             style={{
@@ -132,7 +131,7 @@ export default function Hero() {
           }}
         >
           Hi, saya{" "}
-          <span style={{ color: "var(--text)", fontWeight: 500 }}>Condro</span>
+          <span style={{ color: "var(--text)", fontWeight: 500 }}>Agung</span>
           . Saya membangun pengalaman web yang{" "}
           <span style={{ color: "var(--accent)" }}>cepat</span>,{" "}
           <span style={{ color: "var(--accent)" }}>aksesibel</span>, dan{" "}
@@ -215,9 +214,9 @@ export default function Hero() {
           style={{ borderTop: "1px solid var(--border)" }}
         >
           {[
-            { num: "2+", label: "Years Exp." },
-            { num: "20+", label: "Projects Built" },
-            { num: "10+", label: "Happy Clients" },
+            { num: "1+", label: "Years Exp." },
+            { num: "3+", label: "Projects Built" },
+            { num: "3+", label: "Happy Clients" },
           ].map((stat) => (
             <div key={stat.label}>
               <div
