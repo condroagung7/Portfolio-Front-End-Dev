@@ -74,7 +74,7 @@ export default function Contact() {
             {/* Social links */}
             <div className="flex flex-col gap-4">
               {[
-                { label: "Email", value: "condro@example.com", href: "mailto:condro@example.com" },
+                { label: "Email", value: "condroagung7@gmail.com", href: "mailto:condroagung7@gmail.com" },
                 { label: "LinkedIn", value: "linkedin.com/in/condro", href: "https://www.linkedin.com/in/condro-agung-utomo/" },
                 { label: "Instagram", value: "@condroagung", href: "https://www.instagram.com/condroagung/" },
               ].map((item) => (
